@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Today's Date</title>
+</head>
+
+<body>
+	<canvas id="webgl_hello_world" width="800" height="600"></canvas>
+    <script type="x-shader/x-fragment" id="shader-fs">
+    	precision mediump float;
+
+    	void main(void) {
+    	gl_FragColor = vec4(0.9, 0.3, 0.6, 1.0);
+    }
+    </script>
+    <script type="x-shader/x-vertex" id="shader-vs">
+    	attribute vec3 Position;
+
+    	uniform mat4 u_ModelView;
+    	uniform mat4 u_Persp;
+
+    	void main(void) {
+    	gl_Position = u_Persp * u_ModelView * vec4(Position, 1.0);
+    }
+    </script>
+    <script type="text/javascript">
+    	var canvas = document.getElementById("webgl_hello_world");
+		initGL(canvas);
+
+		var gl;
+
+		function initGL(canvas) {
+			try {
+				console.log(canvas);
+				gl = canvas.getContext("webgl");
+				gl.viewPortWidth = canvas.width;
+				gl.viewPortHeight = canvas.height;
+			} catch (e) {
+				console.log(e.message);
+			}
+			if(!gl) {
+				alert('WebGL problem!');
+			}
+		}
+		console.log("gl is " + gl);
+
+		gl.clearColor(0.75, 0.8, 0.9, 1.0);
+		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+   //  	var shader_prog;
+
+   //  	function initShaders() {
+   //  		var fragmentShader = getShader(gl, "shader-fs");
+   //  		var vertexShader = getShader(gl, "shader-vs");
+
+   //  		shader_prog = gl.createProgram();
+   //  		gl.attachShader(shader_prog, vertexShader);
+   //  		gl.attachShader(shader_prog, fragmentShader);
+			// gl.linkProgram(shader_prog);
+
+			// if (!gl.getProgramParameter(shader_prog, gl.LINK_STATUS)) {
+			// 	alert("Could not initialize shaders!");
+			// 	return;
+			// }
+			// gl.useProgram(shader_prog);
+
+			// shader_prog.positionLocation = gl.getAttribLocation(shader_prog, "Position");
+			// gl.enableVertexAttribArray(shader_prog.positionLocation);
+
+			// shader_prog.u_PerspLocation = gl.getUniformLocation(shader_prog, "u_Persp");
+			// shader_prog.u_ModelViewLocation = gl.getUniformLocation(shader_prog, "u_ModelView");
+
+   //  	}
+
+   //  	initShaders();
+    </script>
+</body>
+
+
+
+</html>
